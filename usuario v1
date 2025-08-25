@@ -1,0 +1,53 @@
+#//Essa aqui é a classe do usuario, coloquei pra criar as playlists e remover. Também com a ajuda do chatGPT a gente fez um metodo de calcular os minutos da playlist
+#//coloquei os getters e setter por ultimo pra nn deixar tão poluido
+
+package spotify;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Usuario{
+    private String nome;
+    private String email;
+    private List<Playlist> playlists;
+
+    public Usuario(String nome, String email){
+        this.nome = nome;
+        this.email = email;
+        this.playlists = new ArrayList<>();
+    }
+    public void criarPlaylist(String nomePlaylist){
+        Playlist nova = newPlaylist(nomePlaylist, this);
+        playlists.add(nova);
+    }
+
+   public boolean removerPlaylist(String nomePlaylist){
+    for (int i = 0; i < playlists.size(); i++){
+        if (playlists.get(i).getNome().equalsIgnoreCase(nomePlaylist)){
+            playlists.remove(i);
+            return true;
+        }
+    }
+    return false;
+}
+    public void exibirPlaylists(){
+        if(playlists.isEmpty()){
+            System.out.println("nenhuma playlist criada.");
+        }else{
+            for (playlists p : playlists){
+                System.out.println(p.getNome() + "-" + p.calcularDuracaoTotal() + " min");
+            }
+        }
+    }
+    public String getNome(){
+        return this.nome;
+    }
+    public String getEmail(){
+        return this.email;
+    }
+    public List<Playlist> getplPlaylist(){
+        return this.playlists;
+    }
+
+    
+}
